@@ -39,11 +39,15 @@ int main()
     Tvec v3 = v1 + v2;
 
     // print the results
-    std::cout << "v3: ["; // the "<< " is the "insertion operator which "inserts" the string into the output stream "std::cout"
-    for (auto &e : v3.elements) // auto is a placeholder for the type of the variable. "&" is a ref to the variable. . notation accesses the elements of the vector
+    std::cout << "v3: [";
+    for (auto i = v3.elements.begin(); i != v3.elements.end(); ++i)
     {
-        std::cout << e << " ";
-    };
+        std::cout << *i; // print the element
+        if (std::next(i) != v3.elements.end()) // if this is not the last element
+        {
+            std::cout << " ";
+        }
+    }
     std::cout << "]" << std::endl;
 
     return 0;
