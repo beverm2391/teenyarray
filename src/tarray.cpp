@@ -3,10 +3,18 @@
 #include <stdexcept> // this is for standard exceptions
 
 //! notes ======================================================================
+
+// ! what is vector?
 // vector is a dynamic array built in the standard library
 // it is a template class, which means that it can be used with different data types
 // data is stored in a contiguous memory block
 // handles memory management automatically
+
+// ! memory buffer uses vector for now. why?
+// 1. auto memory management
+// 2. contiguous memory block
+// 3. can be resized
+// 4. convenient functions like push_back, pop_back, etc.
 
 // ! code =======================================================================
 
@@ -15,6 +23,7 @@ class Tarray {
     public:
     // constructor and so on
     Tarray(const std:vector<int>& shape) : shape(shape), offset(0), isContiguous(true), view(nullptr) {
+        // TODO add bounds checking (negative dimensions, zero dimensions, etc.)
         // calcualte total size and allocate memory
         int totalSize = 1;
         for (int dim: shape) {
@@ -41,3 +50,8 @@ class Tarray {
         Tarray* view; // pointer to the view of the array
         std::vector<T> buffer; // buffer with the actual data
 };
+
+// main function
+int main() {
+    return 0;
+}
