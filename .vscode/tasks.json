@@ -12,7 +12,7 @@
                 "${file}",
                 "-o",
                 // "${fileDirname}/${fileBasenameNoExtension}"
-                "${workspaceFolder}/bin/${fileBasenameNoExtension}"
+                "/Users/beneverman/master-bin/teenyarray-bin/${fileBasenameNoExtension}"
             ],
             "options": {
                 "cwd": "${fileDirname}"
