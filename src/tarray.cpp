@@ -57,13 +57,13 @@ class Tarray {
         return buffer[offset]; // placeholder
     }
 
-    // ! other operations
-    reshape() {
-        // make sure to handle impossible reshapes
-    }
-
+    // ! shape operations
+    reshape() {} // make sure to handle impossible reshapes
     transpose() {}    
+
+    // ! static operations
     
+    // ! expose private attributes
     std:size_t getSize() const {
         return size;
     }

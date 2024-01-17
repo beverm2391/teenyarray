@@ -4,9 +4,13 @@
 ### [teenyarray](https://github.com/beverm2391/teenyarray) is to [numpy](https://numpy.org/) as [teenygrad](https://github.com/tinygrad/teenygrad/tree/main) is to [PyTorch](https://pytorch.org/) 
 
 ## TODO
+- [ ] get end-to-end [bindings](https://pybind11.readthedocs.io/en/stable/basics.html) going so I can figure out how i need to abstract this cpp API
+  - [ ] do it in this repo and get everything CMAKE/setuptools configured
+  - [ ] [mlx binding to python docs](https://ml-explore.github.io/mlx/build/html/dev/extensions.html#binding-to-python)
+- [ ] make an API doc [like this](https://ml-explore.github.io/mlx/build/html/python/array.html) for the python API, then go backards from there (think about what teenygrad needs)
 - [ ] foundations:
     - [ ] implement basic indexing (with strides)
-        [X] - decide on a memory layout (row major or column major)
+      - [X] - decide on a memory layout (row major or column major)
         - [ ] figure out if strides should repepresent num bytes or num elements
         - [ ] implement calcualteSize() function
     - [ ] figure out how to add and access data
@@ -26,6 +30,7 @@
 ## Goals
 - Learn cpp
 - Learn about numpy internals
-- Learn about lower level systems concepts like memory management, pointers, etc.
-- Plug this in to teenygrad and get it working end to end
-- Then optimimze it
+- Practice lower level systems concepts like memory management, pointers, etc.
+- Plug this in to teenygrad and get it working end to end'
+- train MNIST
+- Optimimze
