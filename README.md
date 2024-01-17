@@ -6,6 +6,7 @@
 ## TODO
 - [ ] get end-to-end [bindings](https://pybind11.readthedocs.io/en/stable/basics.html) going so I can figure out how i need to abstract this cpp API
   - [ ] do it in this repo and get everything CMAKE/setuptools configured
+    - [ ] figure out how to use `make check -j 4`
   - [ ] [mlx binding to python docs](https://ml-explore.github.io/mlx/build/html/dev/extensions.html#binding-to-python)
 - [ ] make an API doc [like this](https://ml-explore.github.io/mlx/build/html/python/array.html) for the python API, then go backards from there (think about what teenygrad needs)
 - [ ] foundations:
