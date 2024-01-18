@@ -1,0 +1,9 @@
+pyproject.toml
+setup.py
+/Users/beneverman/Documents/Code/systems/teenyarray/src/pybind-example.cpp
+teenyarray.egg-info/PKG-INFO
+teenyarray.egg-info/SOURCES.txt
+teenyarray.egg-info/dependency_links.txt
+teenyarray.egg-info/not-zip-safe
+teenyarray.egg-info/requires.txt
+teenyarray.egg-info/top_level.txt
