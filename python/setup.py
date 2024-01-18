@@ -14,7 +14,10 @@ def workspace():
 ext_modules = [
     Extension(
         'teenyarray',
-        [f'{workspace()}/src/pybind-example.cpp'], # source file for the module
+        [
+            f'{workspace()}/src/pybind-example.cpp'
+            # ! Add more files here
+        ],
         include_dirs=[
             f"{workspace()}/extern/pybind11/include",
         ],

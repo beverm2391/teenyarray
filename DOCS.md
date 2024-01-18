@@ -16,3 +16,6 @@ check `CMakeLists.txt` for options
 
 ## Updating the Python Package on Rebuild
 - just rebuild with Cmake
+
+## Adding A New Source File
+- update the source files argument in `setup.py`

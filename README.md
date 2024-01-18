@@ -1,14 +1,24 @@
 # Teenyarray
 
 ## The Vision...
-### [teenyarray](https://github.com/beverm2391/teenyarray) is to [numpy](https://numpy.org/) as [teenygrad](https://github.com/tinygrad/teenygrad/tree/main) is to [PyTorch](https://pytorch.org/) 
+### [teenyarray](https://github.com/beverm2391/teenyarray) is to [numpy](https://numpy.org/) as [teenygrad](https://github.com/tinygrad/teenygrad/tree/main) is to [tinygrad](https://github.com/tinygrad/tinygrad) (or [PyTorch](https://pytorch.org/))
+
+I'm building this as a personal project in hopes of producing a distillation of a library like Numpy. Just as teenygrad includes only core deep-learning functionality needed to train the MNIST, my goal is to implement a core array API that I can use to train the MNIST. This means replacing Numpy as a dependency of teenygrad with this library.
+
+## Personal Goals
+- build my first "real" cpp project
+- build my first "under the hood" project that exposes Python bindings
+- Learn about numpy internals
+- Practice lower level systems concepts as I write (hopefully clean and efficient) cpp
+- (eventually) learn some GPU programming by implementing this on METAL
+
+## Completed
+- [X] get end-to-end [bindings](https://pybind11.readthedocs.io/en/stable/basics.html) going so I can figure out how i need to abstract this cpp API
+  - [X] do it in this repo and get everything CMAKE/setuptools configured
 
 ## TODO
-- [ ] get end-to-end [bindings](https://pybind11.readthedocs.io/en/stable/basics.html) going so I can figure out how i need to abstract this cpp API
-  - [ ] do it in this repo and get everything CMAKE/setuptools configured
-    - [ ] figure out how to use `make check -j 4`
-  - [ ] [mlx binding to python docs](https://ml-explore.github.io/mlx/build/html/dev/extensions.html#binding-to-python)
 - [ ] make an API doc [like this](https://ml-explore.github.io/mlx/build/html/python/array.html) for the python API, then go backards from there (think about what teenygrad needs)
+  - [ ] figure out how ufuncs work in numpy (check the *Guide To Numpy* book)
 - [ ] foundations:
     - [ ] implement basic indexing (with strides)
       - [X] - decide on a memory layout (row major or column major)
@@ -27,11 +37,3 @@
 
 ## Long Term
 - [ ] once end to end CPU is working, port to METAL
-
-## Goals
-- Learn cpp
-- Learn about numpy internals
-- Practice lower level systems concepts like memory management, pointers, etc.
-- Plug this in to teenygrad and get it working end to end'
-- train MNIST
-- Optimimze
