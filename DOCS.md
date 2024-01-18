@@ -15,3 +15,4 @@ check `CMakeLists.txt` for options
 - cd to `/python` and run `pip install .` which will run the `setup.py` file
 
 ## Updating the Python Package on Rebuild
+- just rebuild with Cmake
