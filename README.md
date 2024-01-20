@@ -18,10 +18,12 @@ I'm building this as a personal project in hopes of producing a distillation of 
 
 ## TODO
 - [ ] read more *Guide To Numpy*
+- [ ] implement the C-style array example in python
 - [ ] make an API doc [like this](https://ml-explore.github.io/mlx/build/html/python/array.html) for the python API, then go backards from there (think about what teenygrad needs)
   - [ ] figure out how ufuncs work in numpy (check the *Guide To Numpy* book)
 - [ ] work on array init methods [see here](/AUXDOCS.md):
     - [ ] write the `calculateStrides()` method for the constructor
+      - [ ] do some manual written examples on paper of the 1-dim memory layout vs the 2-dim layout (can add more dims later)
     - [ ] figure out if strides should repepresent num bytes or num elements
     - [ ] implement basic indexing (with strides)
       - [X] - decide on a memory layout (row major or column major)

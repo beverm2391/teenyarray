@@ -21,6 +21,9 @@ If buffer is None, then only shape, dtype, and order are used.
 If buffer is an object exposing the buffer interface, then all keywords are interpreted.
 No `__init__` method is needed because the array is fully initialized after the `__new__` method [[docs](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html)]
 
+### Indexing Arrays
+![from page 25 of guide to numpy](image.png)
+
 ## Python Internals
 
 ### Magic Methods
