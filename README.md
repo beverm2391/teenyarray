@@ -28,6 +28,7 @@ I'm building this as a personal project in hopes of producing a distillation of 
     - [ ] implememnt views
 - [ ] figure out how dtypes will work
 - [ ] figure out how iteration will work
+- [ ] figure out how allocatoin will work (custom memory allocator)?
 - [ ] get a testing framework setup
     - [ ] write tests for all the foundational methods
 - [ ] Operations:

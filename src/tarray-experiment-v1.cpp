@@ -1,6 +1,11 @@
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
 #include <iostream>
 #include <cstddef> // this is for size_t which is an unsigned integer type
 #include <vector>
+
+namespace py = pybind11; // this is for pybind11 and is used for the PYBIND11_MODULE macro
 
 class Tarray {
 public:
@@ -28,6 +33,7 @@ public:
     std::vector<size_t> getStrides() const {return strides;} // returns a copy of the strides
     char getOrder() const {return order;} // returns a copy of the order
 
+// ! DEBUG ====================
 void print() {
     std::cout << "shape = ";
     for (const auto& s : shape) { std::cout << s << ", "; } // range based for loop that iterates over the shape vector
@@ -50,6 +56,7 @@ void print() {
     std::cout << std::endl;
     std::cout << "order = " << order << std::endl; // print out the order
 }
+// ! DEBUG ====================
 
 private:
     std::vector<size_t> shape;
@@ -66,6 +73,11 @@ private:
         }
         return size;
     }
+
+    // TODO add strides calculation
+    void calculateStrides() {
+        // Calculate strides based on shape and order
+    }
 };
 
 int main() {
@@ -75,4 +87,21 @@ int main() {
     a.print(); // will print out all the attributes
 
     return 0;
+}
+
+PYBIND11_MODULE(teenyarray, m) {
+    py::class_<Tarray>(m, "tarray")
+        .def(py::init<const std::vector<size_t>&, std::vector<float>*, size_t, std::vector<size_t>*, char>(),
+            py::arg("shape"),
+            py::arg("buffer") = nullptr,
+            py::arg("offset") = 0,
+            py::arg("strides") = nullptr,
+            py::arg("order") = 'C'
+        )
+        .def("getShape", &Tarray::getShape)
+        .def("getBuffer", &Tarray::getBuffer)
+        .def("getOffset", &Tarray::getOffset)
+        .def("getStrides", &Tarray::getStrides)
+        .def("getOrder", &Tarray::getOrder)
+        .def("print", &Tarray::print);
 }
