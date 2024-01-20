@@ -7,56 +7,66 @@
 
 namespace py = pybind11; // this is for pybind11 and is used for the PYBIND11_MODULE macro
 
-class Tarray {
+class Tarray
+{
 public:
     Tarray(
-        const std::vector<size_t> &shape, // this is a reference to a vector of size_t
-        std::vector<float>* buffer = nullptr, // this is a pointer to a vector of floats (the * means pointer)
-        size_t offset = 0, // this is a size_t which is an unsigned integer type (it can only be positive)
-        std::vector<size_t>* strides = nullptr, // this is a pointer to a vector of size_t
-        char order = 'C') // this is a char
-    : shape(shape),
-    buffer(buffer ? *buffer : std::vector<float>(calculateSize(shape))), // this is a ternary operator which if buffer is not null then it will use the buffer otherwise it will create a new vector of floats
-    offset(offset), // the offset is the offset in the buffer (for indexing)
-    strides(strides ? *strides : std::vector<size_t>()), // will take strides as an argument otherwise create an empty vector of size_t
-    order(order) // defaults to column major (C)
+        const std::vector<size_t> &shape,
+        const std::vector<float> &buffer = std::vector<float>(), // Changed to actual object
+        size_t offset = 0,
+        const std::vector<size_t> &strides = std::vector<size_t>(), // Changed to actual object
+        char order = 'C')
+        : shape(shape),
+          buffer(buffer.empty() ? std::vector<float>(calculateSize(shape)) : buffer),
+          offset(offset),
+          strides(strides.empty() ? calculateStrides(shape, order) : strides),
+          order(order)
     {
-        // this is the constructor
-        // TODO add bounds checking (negative dimensions, zero dimensions, etc.)
-        // TODO add strides calculation
+        // Constructor implementation...
     }
 
-// util functions to get attributes and debug
-    std::vector<size_t> getShape() const {return shape;} // returns a copy of the shape
-    std::vector<float> getBuffer() const {return buffer;} // returns a copy of the buffer
-    size_t getOffset() const {return offset;} // returns a copy of the offset
-    std::vector<size_t> getStrides() const {return strides;} // returns a copy of the strides
-    char getOrder() const {return order;} // returns a copy of the order
+    // util functions to get attributes and debug
+    std::vector<size_t> getShape() const { return shape; }     // returns a copy of the shape
+    std::vector<float> getBuffer() const { return buffer; }    // returns a copy of the buffer
+    size_t getOffset() const { return offset; }                // returns a copy of the offset
+    std::vector<size_t> getStrides() const { return strides; } // returns a copy of the strides
+    char getOrder() const { return order; }                    // returns a copy of the order
 
-// ! DEBUG ====================
-void print() {
-    std::cout << "shape = ";
-    for (const auto& s : shape) { std::cout << s << ", "; } // range based for loop that iterates over the shape vector
-    std::cout << std::endl; 
-
-    std::cout << "buffer = ";
-    for (const auto& b : buffer) { std::cout << b << ", "; } // range based for loop that iterates over the buffer vector
-    std::cout << std::endl;
-
-    std::cout << "offset = " << offset << std::endl; // print out the offset
-
-    std::cout << "strides = ";
-    if (!strides.empty()) { // if strides is not empty
-        for (const auto& s : strides) { 
+    // ! DEBUG ====================
+    void print()
+    {
+        std::cout << "shape = ";
+        for (const auto &s : shape)
+        {
             std::cout << s << ", ";
+        } // range based for loop that iterates over the shape vector
+        std::cout << std::endl;
+
+        std::cout << "buffer = ";
+        for (const auto &b : buffer)
+        {
+            std::cout << b << ", ";
+        } // range based for loop that iterates over the buffer vector
+        std::cout << std::endl;
+
+        std::cout << "offset = " << offset << std::endl; // print out the offset
+
+        std::cout << "strides = ";
+        if (!strides.empty())
+        { // if strides is not empty
+            for (const auto &s : strides)
+            {
+                std::cout << s << ", ";
+            }
         }
-    } else { // if strides is empty
-        std::cout << "None";
+        else
+        { // if strides is empty
+            std::cout << "None";
+        }
+        std::cout << std::endl;
+        std::cout << "order = " << order << std::endl; // print out the order
     }
-    std::cout << std::endl;
-    std::cout << "order = " << order << std::endl; // print out the order
-}
-// ! DEBUG ====================
+    // ! DEBUG ====================
 
 private:
     std::vector<size_t> shape;
@@ -65,22 +75,26 @@ private:
     std::vector<size_t> strides;
     char order;
 
-    size_t calculateSize(const std::vector<size_t>& shape) {
+    size_t calculateSize(const std::vector<size_t> &shape)
+    {
         // Calculate total size needed for buffer based on shape (total number of elements)
         size_t size = 1;
-        for (auto& dim : shape) {
+        for (auto &dim : shape)
+        {
             size *= dim;
         }
         return size;
     }
 
-    // TODO add strides calculation
-    void calculateStrides() {
+    std::vector<size_t> calculateStrides(const std::vector<size_t> &shape, char order)
+    {
         // Calculate strides based on shape and order
+        return shape; // TODO - just returning shape right now to see if it fixes the constructor issue in Python
     }
 };
 
-int main() {
+int main()
+{
     std::vector<size_t> shape = {2, 3};
     Tarray a(shape);
 
@@ -89,15 +103,15 @@ int main() {
     return 0;
 }
 
-PYBIND11_MODULE(teenyarray, m) {
+PYBIND11_MODULE(teenyarray, m)
+{
     py::class_<Tarray>(m, "tarray")
-        .def(py::init<const std::vector<size_t>&, std::vector<float>*, size_t, std::vector<size_t>*, char>(),
-            py::arg("shape"),
-            py::arg("buffer") = nullptr,
-            py::arg("offset") = 0,
-            py::arg("strides") = nullptr,
-            py::arg("order") = 'C'
-        )
+        .def(py::init<const std::vector<size_t> &, const std::vector<float> &, size_t, const std::vector<size_t> &, char>(),
+             py::arg("shape"),
+             py::arg("buffer") = std::vector<float>(),
+             py::arg("offset") = 0,
+             py::arg("strides") = std::vector<size_t>(),
+             py::arg("order") = 'C')
         .def("getShape", &Tarray::getShape)
         .def("getBuffer", &Tarray::getBuffer)
         .def("getOffset", &Tarray::getOffset)
