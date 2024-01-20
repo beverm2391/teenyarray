@@ -17,14 +17,15 @@ I'm building this as a personal project in hopes of producing a distillation of 
   - [X] do it in this repo and get everything CMAKE/setuptools configured
 
 ## TODO
+- [ ] read more *Guide To Numpy*
 - [ ] make an API doc [like this](https://ml-explore.github.io/mlx/build/html/python/array.html) for the python API, then go backards from there (think about what teenygrad needs)
   - [ ] figure out how ufuncs work in numpy (check the *Guide To Numpy* book)
-- [ ] foundations:
+- [ ] work on array init methods [see here](/AUXDOCS.md):
+    - [ ] write the `calculateStrides()` method for the constructor
+    - [ ] figure out if strides should repepresent num bytes or num elements
     - [ ] implement basic indexing (with strides)
       - [X] - decide on a memory layout (row major or column major)
-        - [ ] figure out if strides should repepresent num bytes or num elements
-        - [ ] implement calcualteSize() function
-    - [ ] figure out how to add and access data
+        - [X] implement calcualteSize() function
     - [ ] implememnt views
 - [ ] figure out how dtypes will work
 - [ ] figure out how iteration will work

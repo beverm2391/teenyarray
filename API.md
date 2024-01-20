@@ -8,22 +8,27 @@
 - `teenyarray.tarray`
 
 ```python
-class teenyarray.tarray(shape, dtype=float, buffer=None, offset=0, strides=None, order=None
-)
+class teenyarray.tarray(
+    shape: List[int],
+    dtype=float,
+    buffer = None,
+    offset=0,
+    strides=None,
+    order='C')
 ```
-  
-### Attributes
-- shape
-- size
-- strides
-- isContigous
-- view
+**Attributes**
 
-### Methods
+- `data`
+  - the buffer
+- `shape`
+  - the shape
+- `size`
+  - the number of elements in the buffer
+- `strides`
 
-
-
-
+**Methods**
+- `print`
+  - prints out attributes for debugging
 
 ## The ufunc (universal function)
 

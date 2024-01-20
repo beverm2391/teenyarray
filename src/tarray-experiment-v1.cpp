@@ -12,10 +12,10 @@ class Tarray
 public:
     Tarray(
         const std::vector<size_t> &shape,
-        const std::vector<float> &buffer = std::vector<float>(), // Changed to actual object
+        const std::vector<float> &buffer = std::vector<float>(),
         size_t offset = 0,
-        const std::vector<size_t> &strides = std::vector<size_t>(), // Changed to actual object
-        char order = 'C')
+        const std::vector<size_t> &strides = std::vector<size_t>(),
+        char order = 'R') // row major
         : shape(shape),
           buffer(buffer.empty() ? std::vector<float>(calculateSize(shape)) : buffer),
           offset(offset),
@@ -31,6 +31,7 @@ public:
     size_t getOffset() const { return offset; }                // returns a copy of the offset
     std::vector<size_t> getStrides() const { return strides; } // returns a copy of the strides
     char getOrder() const { return order; }                    // returns a copy of the order
+    size_t getSize() const { return buffer.size(); }           // returns the size of the buffer
 
     // ! DEBUG ====================
     void print()
@@ -41,16 +42,13 @@ public:
             std::cout << s << ", ";
         } // range based for loop that iterates over the shape vector
         std::cout << std::endl;
-
         std::cout << "buffer = ";
         for (const auto &b : buffer)
         {
             std::cout << b << ", ";
         } // range based for loop that iterates over the buffer vector
         std::cout << std::endl;
-
         std::cout << "offset = " << offset << std::endl; // print out the offset
-
         std::cout << "strides = ";
         if (!strides.empty())
         { // if strides is not empty
@@ -65,6 +63,7 @@ public:
         }
         std::cout << std::endl;
         std::cout << "order = " << order << std::endl; // print out the order
+        std::cout << "size = " << getSize() << std::endl;
     }
     // ! DEBUG ====================
 
@@ -111,11 +110,10 @@ PYBIND11_MODULE(teenyarray, m)
              py::arg("buffer") = std::vector<float>(),
              py::arg("offset") = 0,
              py::arg("strides") = std::vector<size_t>(),
-             py::arg("order") = 'C')
-        .def("getShape", &Tarray::getShape)
-        .def("getBuffer", &Tarray::getBuffer)
-        .def("getOffset", &Tarray::getOffset)
-        .def("getStrides", &Tarray::getStrides)
-        .def("getOrder", &Tarray::getOrder)
+             py::arg("order") = 'R')
+        .def_property_readonly("data", &Tarray::getBuffer)
+        .def_property_readonly("shape", &Tarray::getShape)
+        .def_property_readonly("strides", &Tarray::getStrides)
+        .def_property_readonly("size", &Tarray::getSize)
         .def("print", &Tarray::print);
 }
