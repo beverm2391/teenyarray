@@ -36,7 +36,9 @@ class Tarray {
     public:
     //! constructor
     // modify this to init strides and offset based on shape
-    Tarray(const std:vector<int>& shape) : shape(shape), offset(0), isContiguous(true), view(nullptr) {
+    Tarray(const std::vector<size_t> &shape,
+            const std::string &dtype = "float32"
+    ) : shape(shape), offset(0), isContiguous(true), view(nullptr) {
         // TODO add bounds checking (negative dimensions, zero dimensions, etc.)
         
         // calcualte total size and allocate memory

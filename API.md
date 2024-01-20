@@ -5,10 +5,25 @@
 - currently copying the structure of the [numpy docs](https://numpy.org/doc/stable/reference/index.html)
 
 ## The n-dimensional Array (tarray)
-    - `teenyarray.tarray` 
+- `teenyarray.tarray`
+
+```python
+class teenyarray.tarray(shape, dtype=float, buffer=None, offset=0, strides=None, order=None
+)
+```
+  
 ### Attributes
+- shape
+- size
+- strides
+- isContigous
+- view
 
 ### Methods
+
+
+
+
 
 ## The ufunc (universal function)
 
