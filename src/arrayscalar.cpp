@@ -1,91 +1,79 @@
-#include <string>
 #include <pybind11/pybind11.h>
+#include <string>
 
-enum class DataType
-{
-    float16,
-    float32,
-    // float64,
-    // int8,
-    // int16,
-    int32,
-    // int64,
-    // uint8,
-    // uint16,
-    // uint32,
-    // uint64,
-    // bool_,
-    // complex64,
-    // complex128
-};
+// ! Data types ===================================================
+enum class DataType { Float32, Int32 }; // enum
 
-class Dtype
-{
-private:
-    DataType type;
-    size_t size; // size in bytes
-
+class Dtype {
 public:
-    Dtype(DataType type, size_t size) : type(type), size(size) {}
+  DataType type;
 
-    DataType getType() const
-    {
-        return type;
+  Dtype(DataType t) : type(t) {}
+
+  size_t getSize() const {
+    switch (type) {
+    case DataType::Float32:
+      return 4;
+    case DataType::Int32:
+      return 4;
+    default:
+      throw std::runtime_error("Unsupported data type");
     }
-    size_t getSize() const
-    {
-        switch (type)
-        {
-        case DataType::float16:
-            return 2;
-        case DataType::float32:
-            return 4;
-        case DataType::int32:
-            return 4;
-        default:
-            throw std::runtime_error("Unsupported data type: " + std::to_string(static_cast<int>(type)));
-        }
-        // TODO add more methods
-    };
+  }
+
+  std::string str() const {
+    switch (type) {
+    case DataType::Float32:
+      return "Dtype(float32)";
+    case DataType::Int32:
+      return "Dtype(int32)";
+    default:
+      throw std::runtime_error("Unsupported data type");
+    }
+  }
 };
 
-class ArrayScalar
-{
-private:
-    double value;
-    Dtype dtype;
+// ! ArrayScalar =================================================
+template <typename T> class ArrayScalar {
+  T value;
+  Dtype dtype;
 
 public:
-    ArrayScalar(double value, Dtype dtype) : value(value), dtype(dtype) {}
+  ArrayScalar(T val, Dtype dt) : value(val), dtype(dt) {}
 
-    double getValue() const { return value; }
-    Dtype getDtype() const { return dtype; }
+  T getValue() const { return value; }
+  Dtype getDtype() const { return dtype; }
 
-    // TODO add more methods
+  // TODO add more methods
+  // type compatibility
+  // casting
+  // validating arguments??
+  // arithmetic operations
 };
+
+// ! Pybind ========================================================
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(teenyarray, m)
-{
-    // define the DataType enum
-    py::enum_<DataType>(m, "DataType")
-        .value("float16", DataType::float16)
-        .value("float32", DataType::float32)
-        .value("int32", DataType::int32)
-        .export_values(); // export the enum values to Python
+PYBIND11_MODULE(teenyarray, m) {
+  py::enum_<DataType>(m, "DataType") // optionally expose the enum
+      .value("Float32", DataType::Float32)
+      .value("Int32", DataType::Int32)
+      .export_values();
 
-    // define the Dtype class
-    py::class_<Dtype>(m, "Dtype")
-        .def(py::init<std::string, size_t>())
-        .def("getType", &Dtype::getType)
-        .def("getSize", &Dtype::getSize);
-    // TODO add more methods
+  py::class_<Dtype>(m, "Dtype")
+      .def(py::init<DataType>())
+      .def("getSize", &Dtype::getSize)
+      .def("__str__", &Dtype::str); // __str__ is the magic method for str()
 
-    // define the ArrayScalar class
-    py::class_<ArrayScalar>(m, "ArrayScalar")
-        .def(py::init<double, Dtype>())
-        .def("getValue", &ArrayScalar::getValue)
-        .def("getDtype", &ArrayScalar::getDtype);
-    // TODO add more methods
+  // For ArrayScalar, I need to bind each specialized template
+  py::class_<ArrayScalar<float>>(m, "ArrayScalarFloat32")
+      .def(py::init<float, Dtype>())
+      .def("getValue", &ArrayScalar<float>::getValue)
+      .def("getDtype", &ArrayScalar<float>::getDtype);
+
+  py::class_<ArrayScalar<int>>(m, "ArrayScalarInt32")
+      .def(py::init<int, Dtype>())
+      .def("getValue", &ArrayScalar<int>::getValue)
+      .def("getDtype", &ArrayScalar<int>::getDtype);
 }
