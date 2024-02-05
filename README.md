@@ -17,6 +17,18 @@ I'm building this as a personal project in hopes of producing a distillation of 
   - [X] do it in this repo and get everything CMAKE/setuptools configured
 
 ## TODO
+- [ ] get the 4 main classes defined (skeleton) and exposed via bindings
+  - [ ] Tarray
+  - [ ] Tfunc
+  - [ ] Data Type
+  - [ ] ArrayScalar
+    - [ ] add more methods
+      - [ ] type compatibility
+      - [ ] casting
+      - [ ] validating arguments
+      - [ ] arethmetic opertaions
+    - [ ] write tests for each method in cpp
+    - [ ] write tests for each method in python
 - [ ] read more *Guide To Numpy*
 - [ ] implement the C-style array example in python
 - [ ] make an API doc [like this](https://ml-explore.github.io/mlx/build/html/python/array.html) for the python API, then go backards from there (think about what teenygrad needs)
