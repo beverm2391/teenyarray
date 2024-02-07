@@ -48,6 +48,10 @@ I'm building this as a personal project in hopes of producing a distillation of 
     - [ ] get a list of [the 28 OPs](https://github.com/tinygrad/teenygrad/blob/main/teenygrad/lazy.py) we will need to plug into teenygrad (basically all the numpy ops it uses)
 - [ ] get the first end-to-end process setup (expose the bindings to python)
     - [ ] using float32 dtype, hardcoded for now
+- [ ] add an overall line counter (resist the bloat!)
 
 ## Long Term
+- [ ] do a writeup on why i built this, clearly outlining the process
+- [ ] work on optimizations (matmul, etc.)
 - [ ] once end to end CPU is working, port to METAL
+- [ ] get some sort of benchmark going

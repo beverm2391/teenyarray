@@ -1,4 +1,5 @@
 # Python API Docs
+This will eventually be the exposed python API. right now its just random crap
 
 - This is going to hold the API for the main teenyarray object
 - I'll define here exactly what methods I'll need to expose to plug into teenygrad
