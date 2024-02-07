@@ -29,9 +29,7 @@ I'm building this as a personal project in hopes of producing a distillation of 
       - [ ] arethmetic opertaions
     - [ ] write tests for each method in cpp
     - [ ] write tests for each method in python
-- [ ] read more *Guide To Numpy*
-- [ ] implement the C-style array example in python
-- [ ] make an API doc [like this](https://ml-explore.github.io/mlx/build/html/python/array.html) for the python API, then go backards from there (think about what teenygrad needs)
+- [ ] get the skeleton broadcasting logic
   - [ ] figure out how ufuncs work in numpy (check the *Guide To Numpy* book)
 - [ ] work on array init methods [see here](/AUXDOCS.md):
     - [ ] write the `calculateStrides()` method for the constructor
