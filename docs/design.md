@@ -9,6 +9,8 @@ avoid the bloat at all costs. aggresivly refactor down. add line counter. test d
 # Main Abstractions
 
 ## `TArray` (teeny array)
+Encapsulates data storage, shape, and strides. This should include efficient memory management and include all basic ops.
+
 - array creation
 - indexing and slicing
 - shaping
