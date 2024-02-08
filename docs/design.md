@@ -32,3 +32,14 @@ think of this as a 0 dimensional array
 - same elementwise operations as `tarray`
   - these aren't performed on the arrayscalar object itself, but the underlying data
 - make sure to handle ops between this and tarray (broadcasting could be tricky here)
+
+# Secondary Abstractions
+not exactly sure what I'll need yet
+
+## `Allocator`
+For memory allocation
+
+## `Iterator`
+For multidimensional iteration - figure out how NumPy handles this
+see the beautiful code chapter on NumPy
+This will be interesting because just like slicing/indexing, you need to operate on a contiguous buffer
