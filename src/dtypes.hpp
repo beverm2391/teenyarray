@@ -1,3 +1,6 @@
+#ifndef DTYPES_HPP
+#define DTYPES_HPP
+
 #include <cstddef>
 #include <iostream>
 #include <string>
@@ -51,6 +54,10 @@ class Float32 : public DtypeAbstract {
             // TODO implement this
         }
 
+        static size_t getItemSize() {
+            return itemsize;
+        }
+
         std::string str() const override {
             return "float32";
         }
@@ -68,6 +75,10 @@ class Int32 : public DtypeAbstract {
             // TODO implement this
         }
 
+        static size_t getItemSize() {
+            return itemsize;
+        }
+
         std::string str() const override {
             return "int32";
         }
@@ -80,6 +91,8 @@ class Int32 : public DtypeAbstract {
 //? have to define these outside of the class to avoid "symbol not found in namespace" error in Python
 constexpr size_t Float32::itemsize;
 constexpr size_t Int32::itemsize;
+
+#endif
 
 // ! Bindings ===================================================
 

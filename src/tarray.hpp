@@ -1,10 +1,17 @@
+#ifndef TARRAY_HPP
+#define TARRAY_HPP
+
+#include <iostream>
+#include <stddef.h>
+#include <vector>
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
-int main() {
-    return 0;
-}
+template <typename Dtype> // dtype agnostic
+class Tarray {};
+
+#endif
 
 // ! Bindings ===================================================
 

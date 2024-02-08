@@ -35,6 +35,12 @@ avoid the bloat at all costs. aggresivly refactor down. add line counter. test d
 ## `Dtype` (data type)
 - int32, float32 for now
 
+### Runtime Type System
+This is necessary because we need runtime type information (RTTI) to handle dynamic type behaviors like NumPy's `dtype` abstraction
+This includes:
+  - a `Dtype` class that encapsulates type info/metadata (name, itemsize, biteorder, etc.) 
+  - the Dtype Registry maps identifiers (strings or enums) to `Dtype` instances. This allows for dynamic type resolution at runtime
+
 ## `ArrayScalar`
 think of this as a 0 dimensional array
 - same elementwise operations as `tarray`
