@@ -10,6 +10,4 @@ add_subdirectory(extern/pybind11)  # subdirectory containing pybind11
 
 # there has to be a .cpp file in the module else itll throw
 # "Cannot determine link language"
-pybind11_add_module(teenyarray
-    src/core.cpp
-)
+pybind11_add_module(teenyarray src/core.cpp)
