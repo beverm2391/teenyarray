@@ -18,6 +18,10 @@ avoid the bloat at all costs. aggresivly refactor down. add line counter. test d
   - matrix ops/linalg
 
 ## `tfunc` (teeny function)
+- broadcasting
+- type checking
+- buffered coercion
+  - use a temporary buffer to hold data while converting (coercing) dytpes
 - element wise ops
 
 ## `Dtype` (data type)
@@ -27,3 +31,4 @@ avoid the bloat at all costs. aggresivly refactor down. add line counter. test d
 think of this as a 0 dimensional array
 - same elementwise operations as `tarray`
   - these aren't performed on the arrayscalar object itself, but the underlying data
+- make sure to handle ops between this and tarray (broadcasting could be tricky here)

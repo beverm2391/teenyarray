@@ -18,17 +18,10 @@ I'm building this as a personal project in hopes of producing a distillation of 
 
 ## TODO
 - [ ] get the 4 main classes defined (skeleton) and exposed via bindings
+  - [ ] dtype
   - [ ] Tarray
-  - [ ] Tfunc
-  - [ ] Data Type
   - [ ] ArrayScalar
-    - [ ] add more methods
-      - [ ] type compatibility
-      - [ ] casting
-      - [ ] validating arguments
-      - [ ] arethmetic opertaions
-    - [ ] write tests for each method in cpp
-    - [ ] write tests for each method in python
+  - [ ] tfunc
 - [ ] get the skeleton broadcasting logic
   - [ ] figure out how ufuncs work in numpy (check the *Guide To Numpy* book)
 - [ ] work on array init methods [see here](/AUXDOCS.md):
@@ -39,7 +32,6 @@ I'm building this as a personal project in hopes of producing a distillation of 
       - [X] - decide on a memory layout (row major or column major)
         - [X] implement calcualteSize() function
     - [ ] implememnt views
-- [ ] figure out how dtypes will work
 - [ ] figure out how iteration will work
 - [ ] figure out how allocatoin will work (custom memory allocator)?
 - [ ] get a testing framework setup
