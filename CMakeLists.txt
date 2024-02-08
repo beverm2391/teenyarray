@@ -7,6 +7,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_subdirectory(extern/pybind11)  # subdirectory containing pybind11
-pybind11_add_module(teenyarray src/core.cpp)
+pybind11_add_module(teenyarray src/dtypes.cpp)
 # pybind11_add_module(teenyarray src/tarray-experiment-v1.cpp)  # name of the module and source file(s)
 # pybind11_add_module(pybindtest src/pybind-example-v2.cpp)
