@@ -20,27 +20,29 @@ I'm building this as a personal project in hopes of producing a distillation of 
 ## TODO
 - [ ] get the 4 main classes defined (skeleton) and exposed via bindings
   - [X] Dtype
-  - [ ] Tarray
-  - [ ] ArrayScalar
+  - [X] Tarray
+    - [ ] add array creation methods
+      - [X] static methods (.zeroes() .ones(), etc)
+      - [ ] figure out a way to bind fill to python (takes in python type, passes through correct func with C-type (which is manually created from the temlate function))
+        - [ ] might need a new typeMap??
+      - [ ] from python data (.array())
+      - [ ] figure out a default datatype if no argument is provided
+    - [ ] __getitem__ and __setitem__
+      - [ ] basic indexing
+      - [ ] slicing
+    - [ ] reshape
+    - [ ] tranposing
   - [ ] Tfunc
-- [ ] get the skeleton broadcasting logic
-  - [ ] figure out how ufuncs work in numpy (check the *Guide To Numpy* book)
-- [ ] work on array init methods [see here](/AUXDOCS.md):
-    - [ ] write the `calculateStrides()` method for the constructor
-      - [ ] do some manual written examples on paper of the 1-dim memory layout vs the 2-dim layout (can add more dims later)
-    - [ ] figure out if strides should repepresent num bytes or num elements
-    - [ ] implement basic indexing (with strides)
-      - [X] - decide on a memory layout (row major or column major)
-        - [X] implement calcualteSize() function
-    - [ ] implememnt views
+    - [ ] break the [the 28 OPs](https://github.com/tinygrad/teenygrad/blob/main/teenygrad/lazy.py) into categories: Unary, Binary, Reduce, Ternary, and Load
+    - [ ] handle broadcasting
+  - [ ] ArrayScalar
+      - [ ] get element-wise ops working
 - [ ] figure out how iteration will work
-- [ ] figure out how allocatoin will work (custom memory allocator)?
+- [ ] work on memory management
+  - [ ] lazy evaluation
+  - [ ] copy on write?
 - [ ] get a testing framework setup
     - [ ] write tests for all the foundational methods
-- [ ] Operations:
-    - [ ] get a list of [the 28 OPs](https://github.com/tinygrad/teenygrad/blob/main/teenygrad/lazy.py) we will need to plug into teenygrad (basically all the numpy ops it uses)
-- [ ] get the first end-to-end process setup (expose the bindings to python)
-    - [ ] using float32 dtype, hardcoded for now
 - [ ] add an overall line counter (resist the bloat!)
 
 ## Long Term

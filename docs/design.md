@@ -19,13 +19,7 @@ Encapsulates data storage, shape, and strides. This should include efficient mem
   - reduction ops
   - matrix ops/linalg
 
-### Handling Different Dtypes - Templates + Polymorphism
-- Base `Dtype` class defines the interface for all data types
-  - virtual functions for any operations (like type converion)
-- Derived `Dtype` classes
-  - for each data type, use a derived class that implementes the Dtype interface. This will be the actual implementation of the ops defined in the `Dtype` interface
-- `Tarray` Class
-  - instead of hanving a template param for the data type, use a pointer to a `Dtype` object, which would be set to an instance of the appropriate derived class (based on the data type of the array)
+
 
 ## `tfunc` (teeny function)
 - broadcasting
@@ -35,6 +29,7 @@ Encapsulates data storage, shape, and strides. This should include efficient mem
 - element wise ops
 
 ## `Dtype` (data type)
+dtype metadata objects `TypeMetadata` are store in the `TypeRegistry` which is accessed in the `Tarray` constructor 
 - int32, float32 for now
 
 ### Runtime Type System
