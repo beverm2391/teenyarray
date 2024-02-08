@@ -17,6 +17,14 @@ avoid the bloat at all costs. aggresivly refactor down. add line counter. test d
   - reduction ops
   - matrix ops/linalg
 
+### Handling Different Dtypes - Templates + Polymorphism
+- Base `Dtype` class defines the interface for all data types
+  - virtual functions for any operations (like type converion)
+- Derived `Dtype` classes
+  - for each data type, use a derived class that implementes the Dtype interface. This will be the actual implementation of the ops defined in the `Dtype` interface
+- `Tarray` Class
+  - instead of hanving a template param for the data type, use a pointer to a `Dtype` object, which would be set to an instance of the appropriate derived class (based on the data type of the array)
+
 ## `tfunc` (teeny function)
 - broadcasting
 - type checking

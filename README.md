@@ -5,6 +5,11 @@
 
 I'm building this as a personal project in hopes of producing a distillation of a library like Numpy. Just as teenygrad includes only core deep-learning functionality needed to train the MNIST, my goal is to implement a core array API that I can use to train the MNIST. This means replacing Numpy as a dependency of teenygrad with this library.
 
+- [design](docs/design.md) outlines design choices
+- [developer-docs](docs/developer-docs.md) will help get things working
+- [python-api](docs/python-api.md) will eventually have the Python API
+- [auxillary-docs](docs/auxillary-docs.md) has external resources and documentation that I've found helpful or relied on
+
 ## Personal Goals
 - build my first "real" cpp project
 - build my first "under the hood" project that exposes Python bindings
@@ -12,16 +17,12 @@ I'm building this as a personal project in hopes of producing a distillation of 
 - Practice lower level systems concepts as I write (hopefully clean and efficient) cpp
 - (eventually) learn some GPU programming by implementing this on METAL
 
-## Completed
-- [X] get end-to-end [bindings](https://pybind11.readthedocs.io/en/stable/basics.html) going so I can figure out how i need to abstract this cpp API
-  - [X] do it in this repo and get everything CMAKE/setuptools configured
-
 ## TODO
 - [ ] get the 4 main classes defined (skeleton) and exposed via bindings
-  - [ ] dtype
+  - [X] Dtype
   - [ ] Tarray
   - [ ] ArrayScalar
-  - [ ] tfunc
+  - [ ] Tfunc
 - [ ] get the skeleton broadcasting logic
   - [ ] figure out how ufuncs work in numpy (check the *Guide To Numpy* book)
 - [ ] work on array init methods [see here](/AUXDOCS.md):
