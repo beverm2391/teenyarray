@@ -4,6 +4,12 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <cstdint>
+
+#include <cxxabi.h>
+#include <iostream>
+#include <sstream>
+#include <typeinfo>
 
 // ! Dtype ===================================================
 // Dtype struct to hold metadata
@@ -16,9 +22,30 @@ struct TypeMetadata {
 
 // ! Type Registry ===================================================
 std::map<std::string, TypeMetadata> typeRegistry = {
-    {"float32", TypeMetadata(4, "float32")}, {"int32", TypeMetadata(4, "int32")}
+    {"float32", TypeMetadata(4, "float32")},
+    {"int32", TypeMetadata(4, "int32")}
     // TODO add more types
 };
+
+// ! Utils ===================================================
+
+// ? Debug types ===================================================
+std::string demangle(const char* name) {
+    int status = -1;
+    std::unique_ptr<char, void(*)(void*)> res {
+        abi::__cxa_demangle(name, NULL, NULL, &status),
+        std::free
+    };
+    return (status == 0) ? res.get() : name;
+}
+
+template<typename T>
+std::string getTypeAndSize(const T& obj) {
+    std::ostringstream ss;
+    ss << "Type: " << demangle(typeid(obj).name()) << ", ";
+    ss << "Size: " << sizeof(obj) << " bytes";
+    return ss.str();
+}
 
 // ! Tarray ===================================================
 class Tarray {
@@ -72,10 +99,6 @@ class Tarray {
     template <typename T>
     void fillWithValue(const T& value) {
         // fills an instantiated array (that has a shape and dtype) with a single value
-        if (dtype->name != typeid(T).name()) {
-            throw std::runtime_error("Type mismatch."); // TODO handle automatic casting
-        }
-
         for (size_t i = 0; i < size; ++i) { // TODO get this faster than O(n)?
             std::memcpy(static_cast<char*>(data) + i * dtype->itemsize, &value, dtype->itemsize);
         }
@@ -114,13 +137,13 @@ class Tarray {
 
     static Tarray zeros(const std::string& typeName, const std::vector<size_t>& shape) {
         Tarray arr(typeName, shape);
-        arr.fillWithValue(0);
+        arr.fillWithValue(0); // since 0 is an int, it will work with all types, so no need to cast/check
         return arr;
     }
 
     static Tarray ones(const std::string& typeName, const std::vector<size_t>& shape) {
         Tarray arr(typeName, shape);
-        arr.fillWithValue(1);
+        arr.fillWithValue(1); // since 1 is an int, it will work with all types, so no need to cast/check
         return arr;
     }
 
@@ -131,6 +154,12 @@ class Tarray {
 
     std::string repr() const { return "Tarray<Dtype=" + dtype->name + ", Size=" + std::to_string(size) + ">"; }
 };
+
+// ! Template Specializations ===================================================
+
+template std::string getTypeAndSize<float>(const float& obj);
+template std::string getTypeAndSize<int>(const int& obj);
+template std::string getTypeAndSize<double>(const double& obj);
 
 // ! Bindings ===================================================
 
@@ -151,4 +180,14 @@ PYBIND11_MODULE(teenyarray, m) {
         .def_static("zeros", &Tarray::zeros)
         .def("__str__", &Tarray::str)
         .def("__repr__", &Tarray::repr);
+
+    m.def("get_int_type_and_size", [](const int& obj) -> std::string {
+        return getTypeAndSize(obj);
+    });
+    m.def("get_double_type_and_size", [](const double& obj) -> std::string {
+        return getTypeAndSize(obj);
+    });
+    m.def("get_float_type_and_size", [](const float& obj) -> std::string {
+        return getTypeAndSize(obj);
+    });
 }
